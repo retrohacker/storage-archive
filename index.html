@@ -2,10 +2,43 @@
 ---
 <html>
   <head>
-    <script src="./storj.js"></script>
+    <script src='./storj.js'></script>
     <script>
-    function onClick(file) {
-    }
+      const opts = {
+        bridge: 'http://127.0.0.1:32780',
+      }
+      var storj = new Storj(opts);
+      window.storj = storj;
+
+      var bucketId = '{{ site.data.bucket.bucketId }}'
+      var files = [
+        {% for file in site.data.bucket.files %}
+        { name: '{{ file.name }}', id: '{{ file.id }}' },
+        {% endfor %}
+      ]
+
+      function onClick(a, file) {
+        for(var i = 0; i < files.length; i++) {
+          if(files[i].name === file) {
+            renderPaper(a, files[i]);
+            break;
+          }
+        }
+      }
+
+      function renderPaper(a, file) {
+        var iframe = document.createElement('iframe');
+        iframe.id = 'f' + Math.random().toString().split('.')[1];
+        iframe.style.width = "100%";
+        iframe.style.height = "400px";
+        a.parentElement.appendChild(iframe);
+        var f = storj.getFile(bucketId, file.id, function() {
+          f._mimetype = 'application/pdf';
+          f.renderTo(`#${iframe.id}`, function() {
+            console.log(arguments);
+          });
+        });
+      }
     </script>
   </head>
   <body>
@@ -20,7 +53,7 @@
           <h1> {{ path[2] }} </h1>
           <ul>
         {% endif %}
-        <li> <a href="./nojs.html" onclick="onClick('{{path[3]}}'); return false;"> {{ path[3] }}</a> </li>
+        <li> <a href="{{file.path}}" onclick="onClick(this, '{{path[3]}}'); return false;"> {{ path[3] }}</a> </li>
       {% endif %}
     {% endfor %}
   </body>

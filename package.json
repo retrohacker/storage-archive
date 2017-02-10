@@ -1,7 +1,11 @@
 {
+  "scripts": {
+    "build": "node upload.js"
+  },
   "dependencies": {
     "async": "^2.1.4",
     "glob": "^7.1.1",
-    "storj.js": "storj/storj.js#1644212aeaad9d7b31f542a89ef0e2d7afac4829"
+    "mkdirp": "^0.5.1",
+    "storj": "storj/storj.js#284e9f83ae2fa9430a21242444227a1713579995"
   }
 }
