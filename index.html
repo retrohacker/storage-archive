@@ -1,0 +1,27 @@
+---
+---
+<html>
+  <head>
+    <script src="./storj.js"></script>
+    <script>
+    function onClick(file) {
+    }
+    </script>
+  </head>
+  <body>
+    {% assign prev = "notafolder" %}
+    <ul style="display: none;">
+    {% for file in site.static_files %}
+      {% assign path = file.path | split:'/' %}
+      {% if path[1] == "files" %}
+        {% if prev != path[2] %}
+          {% assign prev = path[2] %}
+          </ul>
+          <h1> {{ path[2] }} </h1>
+          <ul>
+        {% endif %}
+        <li> <a href="./nojs.html" onclick="onClick('{{path[3]}}'); return false;"> {{ path[3] }}</a> </li>
+      {% endif %}
+    {% endfor %}
+  </body>
+</html>
