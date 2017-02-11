@@ -8,7 +8,7 @@ var mkdirp = require('mkdirp');
 const result = {}
 const bucketName = process.env.BUCKET_NAME || 'storage-archive';
 const opts = {
-  bridge: process.env.BRIDGE_URL || 'https://api.storj.io',
+  bridge: process.env.STORJ_BRIDGE || 'https://api.storj.io',
   basicAuth: {
     email: process.env.STORJ_EMAIL,
     password: process.env.STORJ_PASSWORD

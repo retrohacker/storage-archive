@@ -4,10 +4,7 @@
   <head>
     <script src='./storj.js'></script>
     <script>
-      const opts = {
-        bridge: 'http://127.0.0.1:32780',
-      }
-      var storj = new Storj(opts);
+      var storj = new Storj();
       window.storj = storj;
 
       var bucketId = '{{ site.data.bucket.bucketId }}'
@@ -20,6 +17,11 @@
       function onClick(a, file) {
         for(var i = 0; i < files.length; i++) {
           if(files[i].name === file) {
+            var frame = document.querySelector(`#f${files[i].id}`);
+            if(frame) {
+              return frame.remove();
+            }
+
             renderPaper(a, files[i]);
             break;
           }
@@ -28,15 +30,17 @@
 
       function renderPaper(a, file) {
         var iframe = document.createElement('iframe');
-        iframe.id = 'f' + Math.random().toString().split('.')[1];
+        iframe.id = 'f' + file.id;
         iframe.style.width = "100%";
         iframe.style.height = "400px";
         a.parentElement.appendChild(iframe);
         var f = storj.getFile(bucketId, file.id, function() {
+          /*
           f._mimetype = 'application/pdf';
           f.renderTo(`#${iframe.id}`, function() {
             console.log(arguments);
           });
+          */
         });
       }
     </script>
