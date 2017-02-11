@@ -44,8 +44,29 @@
         });
       }
     </script>
+    <style>
+      h1 {
+        text-align: center;
+        padding-top: 2em;
+      }
+      p {
+        padding-bottom: 2em;
+        text-align: center;
+      }
+      h2 {
+        padding-left: 2em;
+      }
+      img {
+        width: 60px;
+      }
+      li {
+        list-style: url('./static/pdf_icon.png');
+      }
+    </style>
   </head>
   <body>
+    <h1><img src="./static/book_emoji.png"><br>P2P Storage Papers</h1>
+    <p>All files served with ❤️ from <a href="https://github.com/storj/storj.js">storj.js</a></p>
     {% assign prev = "notafolder" %}
     <ul style="display: none;">
     {% for file in site.static_files %}
@@ -54,7 +75,7 @@
         {% if prev != path[2] %}
           {% assign prev = path[2] %}
           </ul>
-          <h1> {{ path[2] }} </h1>
+          <h2> {{ path[2] }} </h2>
           <ul>
         {% endif %}
         <li> <a href="{{file.path}}" onclick="onClick(this, '{{path[3]}}'); return false;"> {{ path[3] }}</a> </li>
