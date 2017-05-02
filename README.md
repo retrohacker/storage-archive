@@ -1,4 +1,6 @@
 # storage-archive
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/retrohacker/storage-archive.svg)](https://greenkeeper.io/)
 Collection of papers on untrusted distributed storage networks.
 
 Copyright for each paper belongs to the original publisher.
